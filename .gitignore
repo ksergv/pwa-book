@@ -1,0 +1,9 @@
+# system
+.DS_Store
+Thumbs.db
+
+# node (если появится)
+node_modules
+
+# logs
+*.log

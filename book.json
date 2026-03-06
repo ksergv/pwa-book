@@ -1,0 +1,56 @@
+{
+  "pages": [
+    {
+      "id": "item1",
+      "file": "pages/1.html"
+    },
+    {
+      "id": "item2",
+      "file": "pages/2.html"
+    },
+    {
+      "id": "item3",
+      "file": "pages/3.html"
+    },
+    {
+      "id": "item4",
+      "file": "pages/4.html"
+    },
+    {
+      "id": "item5",
+      "file": "pages/5.html"
+    },
+    {
+      "id": "item6",
+      "file": "pages/6.html"
+    },
+    {
+      "id": "item7",
+      "file": "pages/7.html"
+    },
+    {
+      "id": "item8",
+      "file": "pages/8.html"
+    },
+    {
+      "id": "item9",
+      "file": "pages/9.html"
+    },
+    {
+      "id": "item10",
+      "file": "pages/10.html"
+    },
+    {
+      "id": "item11",
+      "file": "pages/11.html"
+    },
+    {
+      "id": "item12",
+      "file": "pages/12.html"
+    },
+    {
+      "id": "item13",
+      "file": "pages/13.html"
+    }
+  ]
+}
