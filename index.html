@@ -235,7 +235,7 @@ async function loadBook(){
 
 const book=await fetch("book.json").then(r=>r.json());
 
-const menu=document.getElementById("menu-toc");
+const menuToc=document.getElementById("menu-toc");
 
 for(let i=0;i<book.pages.length;i++){
 
@@ -283,7 +283,7 @@ document.querySelector(".menu-panel").classList.remove("open");
 
 li.appendChild(a);
 
-menu.appendChild(li);
+menuToc.appendChild(li);
 
 }
 
