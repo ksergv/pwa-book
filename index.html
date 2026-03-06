@@ -32,11 +32,20 @@ text-align:center;
 /* меню */
 
 .menu-panel{
+position:fixed;
+top:0;
+left:-260px;
 width:260px;
+height:100%;
 background:#101010;
 padding:20px;
 overflow:auto;
-transition:transform 0.3s;
+transition:left 0.3s;
+z-index:999;
+}
+
+.menu-panel.open{
+left:0;
 }
 
 .menu-panel h3{
@@ -115,6 +124,8 @@ transform:translateX(-100%);
 /* навигация */
 
 nav{
+position:sticky;
+bottom:0;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -153,6 +164,26 @@ background:#111;
 color:white;
 border:none;
 border-radius:6px;
+}
+
+/* режим чтения */
+
+.reading-ui-hidden h1{
+display:none;
+}
+
+.reading-ui-hidden nav{
+display:none;
+}
+
+/* плавное появление */
+
+nav{
+transition:opacity 0.3s;
+}
+
+h1{
+transition:opacity 0.3s;
 }
 
 /* ===== MOBILE ===== */
@@ -195,7 +226,12 @@ padding:20px;
 @media (orientation: landscape) and (max-width:900px){
 
 .menu-panel{
-transform:translateX(-100%);
+position:fixed;
+left:-260px;
+}
+
+#book-area{
+width:100%;
 }
 
 }
@@ -233,6 +269,8 @@ transform:translateX(-100%);
 </div>
 
 <script>
+
+    
 let fontSize = localStorage.getItem("fontSize") || 18;
 
 document.documentElement.style.setProperty("--fontSize", fontSize + "px");
@@ -403,6 +441,22 @@ localStorage.setItem("bookPage",current);
 document.getElementById("next").onclick=()=>showPage(current+1);
 
 document.getElementById("prev").onclick=()=>showPage(current-1);
+
+/* ===== UI режим чтения ===== */
+
+let uiHidden=false;
+
+function toggleUI(){
+
+uiHidden=!uiHidden;
+
+if(uiHidden){
+document.body.classList.add("reading-ui-hidden");
+}else{
+document.body.classList.remove("reading-ui-hidden");
+}
+
+}
 /* swapping */
 let touchStartX=0;
 let touchEndX=0;
@@ -425,6 +479,32 @@ showPage(current+1);
 }
 
 });
+
+/* тап по странице */
+
+document.getElementById("page").addEventListener("click",(e)=>{
+
+if(e.target.tagName==="IMG") return;
+
+toggleUI();
+
+});
+
+/* авто режим landscape */
+
+function checkLandscape(){
+
+if(window.innerWidth>window.innerHeight){
+document.body.classList.add("reading-ui-hidden");
+}else{
+document.body.classList.remove("reading-ui-hidden");
+}
+
+}
+
+window.addEventListener("resize",checkLandscape);
+
+checkLandscape();
 /* запуск */
 
 loadBook();
