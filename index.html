@@ -203,15 +203,14 @@ flex-direction:column;
 .menu-panel{
 position:fixed;
 top:0;
-left:0;
+left:-260px;
+width:260px;
 height:100%;
-width:240px;
-transform:translateX(-100%);
-z-index:999;
+transition:left 0.3s;
 }
 
 .menu-panel.open{
-transform:translateX(0);
+left:0;
 }
 
 #menuButton{
@@ -227,9 +226,16 @@ padding:20px;
 
 .menu-panel{
 position:fixed;
+top:0;
 left:-260px;
+width:260px;
+height:100%;
+transition:left 0.3s;
 }
 
+.menu-panel.open{
+left:0;
+}
 #book-area{
 width:100%;
 }
@@ -494,17 +500,19 @@ toggleUI();
 
 function checkLandscape(){
 
-if(window.innerWidth>window.innerHeight){
+const isMobile = window.innerWidth <= 900;
+
+if(isMobile && window.innerWidth > window.innerHeight){
+
 document.body.classList.add("reading-ui-hidden");
+
 }else{
+
 document.body.classList.remove("reading-ui-hidden");
-}
 
 }
 
-window.addEventListener("resize",checkLandscape);
-
-checkLandscape();
+}
 /* запуск */
 
 loadBook();
