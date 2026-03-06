@@ -40,8 +40,10 @@ height:100%;
 background:#101010;
 padding:20px;
 overflow:auto;
+
 transform:translateX(-100%);
-transition:transform 0.3s;
+transition:transform 0.3s ease;
+
 z-index:999;
 }
 
@@ -204,13 +206,21 @@ flex-direction:column;
 .menu-panel{
 position:fixed;
 top:0;
+left:0;
 width:260px;
 height:100%;
-transition:left 0.3s;
+background:#101010;
+padding:20px;
+overflow:auto;
+
+transform:translateX(-100%);
+transition:transform 0.3s ease;
+
+z-index:999;
 }
 
 .menu-panel.open{
-left:0;
+transform:translateX(0);
 }
 
 #menuButton{
@@ -222,13 +232,7 @@ padding:20px;
 }
 
 }
-@media (orientation: landscape) and (max-width:900px){
 
-#book-area{
-width:100%;
-}
-
-}
 </style>
 
 </head>
