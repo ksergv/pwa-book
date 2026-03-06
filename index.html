@@ -232,6 +232,47 @@ padding:20px;
 }
 
 }
+@media (orientation: landscape) and (max-width:900px){
+nav button{
+font-size:18px;
+padding:12px 6px;
+max-width:60px;
+}
+
+#container{
+flex-direction:column;
+}
+
+.menu-panel{
+position:fixed;
+top:0;
+left:0;
+width:260px;
+height:100%;
+background:#101010;
+padding:20px;
+overflow:auto;
+
+transform:translateX(-100%);
+transition:transform 0.3s ease;
+
+z-index:999;
+}
+
+.menu-panel.open{
+transform:translateX(0);
+}
+
+#menuButton{
+display:block;
+}
+
+.page-inner{
+padding:20px;
+}
+
+
+}
 
 </style>
 
