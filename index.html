@@ -3,7 +3,8 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>Книга</title>
 
 <link rel="manifest" href="manifest.json">
@@ -190,7 +191,12 @@ display:block;
 padding:20px;
 }
 
+}
+@media (orientation: landscape) and (max-width:900px){
 
+.menu-panel{
+transform:translateX(-100%);
+}
 
 }
 </style>
