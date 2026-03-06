@@ -1,85 +1,90 @@
-const CACHE_NAME="book-pwa-v2";
+const CACHE_NAME = "book-pwa-v3";
 
-/* основные файлы */
-
-const STATIC_FILES=[
-"./",
-"./index.html",
-"./manifest.json",
-"./book.json"
+const STATIC_FILES = [
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./book.json"
 ];
 
 /* установка */
 
-self.addEventListener("install",event=>{
+self.addEventListener("install", event => {
 
-event.waitUntil(
+  event.waitUntil(
 
-caches.open(CACHE_NAME).then(async cache=>{
+    caches.open(CACHE_NAME).then(async cache => {
 
-/* кэшируем основные файлы */
+      await cache.addAll(STATIC_FILES);
 
-await cache.addAll(STATIC_FILES);
+      /* получаем список страниц */
 
-/* получаем список страниц */
+      const response = await fetch("./book.json");
+      const book = await response.json();
 
-const response=await fetch("./book.json");
+      const pages = book.pages.map(p => p.file);
 
-const book=await response.json();
+      await cache.addAll(pages);
 
-/* формируем список страниц */
+    })
 
-const pageFiles=book.pages.map(p=>p.file);
+  );
 
-/* кэшируем всю книгу */
-
-await cache.addAll(pageFiles);
-
-})
-
-);
-
-self.skipWaiting();
+  self.skipWaiting();
 
 });
 
 /* активация */
 
-self.addEventListener("activate",event=>{
-
-event.waitUntil(self.clients.claim());
-
+self.addEventListener("activate", event => {
+  event.waitUntil(self.clients.claim());
 });
 
-/* перехват запросов */
+/* обработка запросов */
 
-self.addEventListener("fetch",event=>{
+self.addEventListener("fetch", event => {
 
-event.respondWith(
+  const url = new URL(event.request.url);
 
-caches.match(event.request)
-.then(response=>{
+  /* картинки */
 
-/* если есть в кеше */
+  if (url.pathname.includes("/img/")) {
 
-if(response) return response;
+    event.respondWith(
 
-/* иначе загрузить и сохранить */
+      caches.match(event.request).then(response => {
 
-return fetch(event.request).then(fetchResponse=>{
+        if (response) return response;
 
-const clone=fetchResponse.clone();
+        return fetch(event.request).then(fetchResponse => {
 
-caches.open(CACHE_NAME).then(cache=>{
-cache.put(event.request,clone);
-});
+          const clone = fetchResponse.clone();
 
-return fetchResponse;
+          caches.open(CACHE_NAME).then(cache => {
+            cache.put(event.request, clone);
+          });
 
-});
+          return fetchResponse;
 
-})
+        });
 
-);
+      })
+
+    );
+
+    return;
+  }
+
+  /* обычная cache-first */
+
+  event.respondWith(
+
+    caches.match(event.request).then(response => {
+
+      return response || fetch(event.request);
+
+    })
+
+  );
 
 });
