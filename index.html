@@ -243,7 +243,13 @@ const p=book.pages[i];
 
 const html = await fetch(p.file).then(r=>r.text());
 
-pages.push(html);
+/* исправляем пути изображений */
+
+const base = location.pathname.includes("/pwa-book/") ? "/pwa-book/" : "/";
+
+const fixedHtml = html.replace(/src="img\//g, 'src="'+base+'img/');
+
+pages.push(fixedHtml);
 
 /* извлекаем заголовок */
 
