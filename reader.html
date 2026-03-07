@@ -159,7 +159,7 @@ background:#555;
 display:none;
 position:fixed;
 top:10px;
-left:10px;
+left:50px;
 z-index:1000;
 padding:10px 14px;
 font-size:18px;
@@ -189,6 +189,19 @@ h1{
 transition:opacity 0.3s;
 }
 
+#backButton{
+position:fixed;
+top:15px;
+left:10px;
+font-size:22px;
+width:35px;
+background:blue;
+color:white;
+border:none;
+border-radius: 5px;
+cursor:pointer;
+z-index:1000;
+}
 /* ===== MOBILE ===== */
 
 @media (max-width:768px){
@@ -279,8 +292,9 @@ padding:20px;
 </head>
 
 <body>
+<button id="backButton">⬅</button>
 <button id="menuButton">☰</button>
-<h1>Создание  Ифрита</h1>
+<h1 id="bookTitle"></h1>
 <div id="container">
 
 <div class="menu-panel">
@@ -311,9 +325,15 @@ padding:20px;
 
 const params = new URLSearchParams(location.search);
 
-const bookName = params.get("book") || "ifrit";
+const bookName = params.get("book") || "";
 
 const bookPath = "books/"+bookName+"/";
+
+document.getElementById("backButton").onclick = function(){
+
+location.href = "index.html"
+
+}
     
 let fontSize = localStorage.getItem("fontSize") || 18;
 
@@ -332,6 +352,8 @@ menu.classList.toggle("open");
 async function loadBook(){
 
 const book=await fetch(bookPath+"book.json").then(r=>r.json());
+
+document.getElementById("bookTitle").textContent = book.title
 
 const menuToc=document.getElementById("menu-toc");
 

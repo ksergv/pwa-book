@@ -1,56 +1,40 @@
 {
+  "title": "Даосская алхимия",
   "pages": [
     {
       "id": 1,
-      "file": "pages/001.html"
+      "file": "pages/001.html",
+      "title": "Путь возвращения в пустоту"
     },
     {
       "id": 2,
-      "file": "pages/002.html"
+      "file": "pages/002.html",
+      "title": "Введение"
     },
     {
       "id": 3,
-      "file": "pages/003.html"
+      "file": "pages/003.html",
+      "title": "Первый этап&#34;Разжигание внутреннего огня&#34; "
     },
     {
       "id": 4,
-      "file": "pages/004.html"
+      "file": "pages/004.html",
+      "title": "Второй этап: Соединение Ци и Шэнь"
     },
     {
       "id": 5,
-      "file": "pages/005.html"
+      "file": "pages/005.html",
+      "title": "Третий этап: Преобразование Шэнь в Сюй"
     },
     {
       "id": 6,
-      "file": "pages/006.html"
+      "file": "pages/006.html",
+      "title": "Четвертый этап: Пустота соединяется с Дао "
     },
     {
       "id": 7,
-      "file": "pages/007.html"
-    },
-    {
-      "id": 8,
-      "file": "pages/008.html"
-    },
-    {
-      "id": 9,
-      "file": "pages/009.html"
-    },
-    {
-      "id": 10,
-      "file": "pages/010.html"
-    },
-    {
-      "id": 11,
-      "file": "pages/011.html"
-    },
-    {
-      "id": 12,
-      "file": "pages/012.html"
-    },
-    {
-      "id": 13,
-      "file": "pages/013.html"
+      "file": "pages/007.html",
+      "title": "🧘  Комплексная практика по этапам"
     }
   ]
 }
