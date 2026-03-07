@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Книга</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#000000">
+
+<style>
+body{
+margin:0;
+font-family:Arial;
+background:#111;
+color:white;
+}
+
+/* контейнер */
+
+#container{
+display:flex;
+height:100vh;
+}
+
+h1{
+text-align:center;
+}
+
+/* меню */
+
+.menu-panel{
+position:fixed;
+top:0;
+left:0;
+width:260px;
+height:100%;
+background:#101010;
+padding:20px;
+overflow:auto;
+
+transform:translateX(-100%);
+transition:transform 0.3s ease;
+
+z-index:999;
+}
+
+.menu-panel.open{
+transform:translateX(0);
+}
+
+.menu-panel h3{
+margin-top:0;
+}
+
+.menu-panel a{
+color:white;
+text-decoration:none;
+display:block;
+padding:8px;
+border-radius:4px;
+}
+
+.menu-panel a:hover{
+background:#444;
+}
+
+/* область книги */
+
+#book-area{
+flex:1;
+display:flex;
+flex-direction:column;
+}
+
+/* контейнер страницы */
+
+#page{
+flex:1;
+overflow:hidden;
+background:white;
+color:black;
+position:relative;
+}
+
+/* слой страницы */
+
+.page-inner{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+overflow:auto;
+padding:40px;
+box-sizing:border-box;
+
+font-size:var(--fontSize,18px);
+line-height:1.6;
+
+background:white;
+
+transition:transform 0.35s ease;
+}
+
+/* текущая страница */
+
+.page-current{
+transform:translateX(0);
+z-index:2;
+}
+
+/* новая справа */
+
+.page-next{
+transform:translateX(100%);
+}
+
+/* новая слева */
+
+.page-prev{
+transform:translateX(-100%);
+}
+
+/* навигация */
+
+nav{
+position:sticky;
+bottom:0;
+display:flex;
+justify-content:center;
+align-items:center;
+gap:6px;
+padding:10px;
+background:#111;
+}
+
+nav button{
+flex:1;
+max-width:70px;
+font-size:20px;
+padding:10px;
+border:none;
+border-radius:6px;
+background:#333;
+color:white;
+cursor:pointer;
+}
+
+nav button:hover{
+background:#555;
+}
+
+/* кнопка меню */
+
+#menuButton{
+display:none;
+position:fixed;
+top:10px;
+left:10px;
+z-index:1000;
+padding:10px 14px;
+font-size:18px;
+background:#111;
+color:white;
+border:none;
+border-radius:6px;
+}
+
+/* режим чтения */
+
+.reading-ui-hidden h1{
+display:none;
+}
+
+.reading-ui-hidden nav{
+display:none;
+}
+
+/* плавное появление */
+
+nav{
+transition:opacity 0.3s;
+}
+
+h1{
+transition:opacity 0.3s;
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width:768px){
+
+nav button{
+font-size:18px;
+padding:12px 6px;
+max-width:60px;
+}
+
+#container{
+flex-direction:column;
+}
+
+.menu-panel{
+position:fixed;
+top:0;
+left:0;
+width:260px;
+height:100%;
+background:#101010;
+padding:20px;
+overflow:auto;
+
+transform:translateX(-100%);
+transition:transform 0.3s ease;
+
+z-index:999;
+}
+
+.menu-panel.open{
+transform:translateX(0);
+}
+
+#menuButton{
+display:block;
+}
+
+.page-inner{
+padding:20px;
+}
+
+}
+@media (orientation: landscape) and (max-width:900px){
+nav button{
+font-size:18px;
+padding:12px 6px;
+max-width:60px;
+}
+
+#container{
+flex-direction:column;
+}
+
+.menu-panel{
+position:fixed;
+top:0;
+left:0;
+width:260px;
+height:100%;
+background:#101010;
+padding:20px;
+overflow:auto;
+
+transform:translateX(-100%);
+transition:transform 0.3s ease;
+
+z-index:999;
+}
+
+.menu-panel.open{
+transform:translateX(0);
+}
+
+#menuButton{
+display:block;
+}
+
+.page-inner{
+padding:20px;
+}
+
+
+}
+
+</style>
+
+</head>
+
+<body>
+<button id="menuButton">☰</button>
+<h1>Создание  Ифрита</h1>
+<div id="container">
+
+<div class="menu-panel">
+
+<h3>Содержание</h3>
+<ul id="menu-toc"></ul>
+
+</div>
+
+<div id="book-area">
+
+<div id="page"></div>
+
+
+<nav>
+<button id="prev">◀</button>
+<button id="next">▶</button>
+<button id="textMinus">🔍−</button>
+<button id="textPlus">🔍+</button>
+</nav>
+
+
+</div>
+
+</div>
+
+<script>
+
+const params = new URLSearchParams(location.search);
+
+const bookName = params.get("book") || "ifrit";
+
+const bookPath = "books/"+bookName+"/";
+    
+let fontSize = localStorage.getItem("fontSize") || 18;
+
+document.documentElement.style.setProperty("--fontSize", fontSize + "px");
+let pages=[];
+let current=0;
+/* меню */
+const menuButton=document.getElementById("menuButton");
+const menu=document.querySelector(".menu-panel");
+
+menuButton.onclick=()=>{
+menu.classList.toggle("open");
+};
+/* загрузка книги */
+
+async function loadBook(){
+
+const book=await fetch(bookPath+"book.json").then(r=>r.json());
+
+const menuToc=document.getElementById("menu-toc");
+
+for(let i=0;i<book.pages.length;i++){
+
+const p=book.pages[i];
+
+const html = await fetch(bookPath + p.file).then(r=>r.text());
+
+/* исправляем пути изображений */
+
+const base = location.pathname.includes("/pwa-book/") ? "/pwa-book/" : "/";
+
+const fixedHtml = html.replace(/src="img\//g, 'src="'+bookPath+'img/');
+
+pages.push(fixedHtml);
+
+/* извлекаем заголовок */
+
+const parser = new DOMParser();
+const doc = parser.parseFromString(html,"text/html");
+
+let title =
+doc.querySelector("h1")?.textContent ||
+doc.querySelector("h2")?.textContent ||
+p.id;
+
+/* меню */
+
+const li=document.createElement("li");
+
+const a=document.createElement("a");
+
+a.href="#";
+a.textContent=title;
+
+a.onclick=(e)=>{
+e.preventDefault();
+
+showPage(i);
+
+/* закрыть меню на мобильном */
+
+document.querySelector(".menu-panel").classList.remove("open");
+
+};
+
+li.appendChild(a);
+
+menuToc.appendChild(li);
+
+}
+
+/* форматриование размера текста */
+
+
+document.getElementById("textPlus").onclick=()=>{
+
+fontSize+=2;
+
+if(fontSize>28) fontSize=28;
+
+document.documentElement.style.setProperty("--fontSize",fontSize+"px");
+
+localStorage.setItem("fontSize",fontSize);
+
+};
+
+document.getElementById("textMinus").onclick=()=>{
+
+fontSize-=2;
+
+if(fontSize<14) fontSize=14;
+
+document.documentElement.style.setProperty("--fontSize",fontSize+"px");
+
+localStorage.setItem("fontSize",fontSize);
+
+};
+/* восстановить страницу */
+
+const saved=localStorage.getItem("bookPage");
+
+if(saved){
+current=parseInt(saved);
+}
+
+showPage(current)
+
+}
+
+/* показать страницу */
+
+function showPage(i){
+
+if(i<0||i>=pages.length) return;
+
+const container=document.getElementById("page");
+
+const oldPage=container.querySelector(".page-current");
+
+const newPage=document.createElement("div");
+
+newPage.className="page-inner";
+
+newPage.innerHTML=pages[i];
+
+/* направление */
+
+const forward=i>current;
+
+if(forward){
+newPage.classList.add("page-next");
+}else{
+newPage.classList.add("page-prev");
+}
+
+container.appendChild(newPage);
+
+/* запуск анимации */
+
+requestAnimationFrame(()=>{
+
+if(oldPage){
+
+oldPage.style.transform=forward
+? "translateX(-100%)"
+: "translateX(100%)";
+
+}
+
+newPage.style.transform="translateX(0)";
+
+});
+
+/* удалить старую страницу */
+
+setTimeout(()=>{
+if(oldPage) oldPage.remove();
+newPage.classList.add("page-current");
+newPage.classList.remove("page-next","page-prev");
+},350);
+
+current=i;
+
+localStorage.setItem("bookPage",current);
+
+}
+/* кнопки */
+
+document.getElementById("next").onclick=()=>showPage(current+1);
+
+document.getElementById("prev").onclick=()=>showPage(current-1);
+
+/* ===== UI режим чтения ===== */
+
+let uiHidden=false;
+
+function toggleUI(){
+
+uiHidden=!uiHidden;
+
+if(uiHidden){
+document.body.classList.add("reading-ui-hidden");
+}else{
+document.body.classList.remove("reading-ui-hidden");
+}
+
+}
+/* swapping */
+let touchStartX=0;
+let touchEndX=0;
+
+const pageElement=document.getElementById("page");
+
+pageElement.addEventListener("touchstart",(e)=>{
+touchStartX=e.changedTouches[0].screenX;
+});
+
+pageElement.addEventListener("touchend",(e)=>{
+touchEndX=e.changedTouches[0].screenX;
+
+if(touchEndX-touchStartX>60){
+showPage(current-1);
+}
+
+if(touchStartX-touchEndX>60){
+showPage(current+1);
+}
+
+});
+
+/* тап по странице */
+
+document.getElementById("page").addEventListener("click",(e)=>{
+
+if(e.target.tagName==="IMG") return;
+
+toggleUI();
+
+});
+
+/* авто режим landscape */
+
+function checkLandscape(){
+
+const isMobile = window.innerWidth <= 900;
+
+if(isMobile && window.innerWidth > window.innerHeight){
+
+document.body.classList.add("reading-ui-hidden");
+
+}else{
+
+document.body.classList.remove("reading-ui-hidden");
+
+}
+
+}
+/* запуск */
+
+loadBook();
+
+</script>
+
+</body>
+</html>

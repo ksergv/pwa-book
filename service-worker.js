@@ -1,90 +1,88 @@
-const CACHE_NAME = "book-pwa-v4";
+const CACHE_NAME = "reader-cache-v1";
 
-const STATIC_FILES = [
-  "./",
-  "./index.html",
-  "./manifest.json",
-  "./book.json"
+/* основные файлы приложения */
+
+const APP_FILES = [
+"./",
+"./index.html",
+"./reader.html",
+"./manifest.json"
 ];
 
 /* установка */
 
 self.addEventListener("install", event => {
 
-  event.waitUntil(
+event.waitUntil(
 
-    caches.open(CACHE_NAME).then(async cache => {
+caches.open(CACHE_NAME).then(cache => {
 
-      await cache.addAll(STATIC_FILES);
+return cache.addAll(APP_FILES);
 
-      /* получаем список страниц */
+})
 
-      const response = await fetch("./book.json");
-      const book = await response.json();
+);
 
-      const pages = book.pages.map(p => p.file);
-
-      await cache.addAll(pages);
-
-    })
-
-  );
-
-  self.skipWaiting();
+self.skipWaiting();
 
 });
 
 /* активация */
 
 self.addEventListener("activate", event => {
-  event.waitUntil(self.clients.claim());
+
+event.waitUntil(self.clients.claim());
+
 });
 
-/* обработка запросов */
+/* fetch */
 
 self.addEventListener("fetch", event => {
 
-  const url = new URL(event.request.url);
+const url = new URL(event.request.url);
 
-  /* картинки */
+/* книги */
 
-  if (url.pathname.includes("/img/")) {
+if(url.pathname.includes("/books/")){
 
-    event.respondWith(
+event.respondWith(
 
-      caches.match(event.request).then(response => {
+caches.match(event.request).then(response => {
 
-        if (response) return response;
+if(response) return response;
 
-        return fetch(event.request).then(fetchResponse => {
+return fetch(event.request).then(fetchResponse => {
 
-          const clone = fetchResponse.clone();
+const clone = fetchResponse.clone();
 
-          caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, clone);
-          });
+caches.open(CACHE_NAME).then(cache => {
 
-          return fetchResponse;
+cache.put(event.request, clone);
 
-        });
+});
 
-      })
+return fetchResponse;
 
-    );
+});
 
-    return;
-  }
+})
 
-  /* обычная cache-first */
+);
 
-  event.respondWith(
+return;
 
-    caches.match(event.request).then(response => {
+}
 
-      return response || fetch(event.request);
+/* обычные файлы */
 
-    })
+event.respondWith(
 
-  );
+caches.match(event.request).then(response => {
+
+return response || fetch(event.request);
+
+})
+
+);
 
 });
