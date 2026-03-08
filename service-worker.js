@@ -1,4 +1,4 @@
-const CACHE_NAME = "reader-cache-v1";
+const CACHE_NAME = "reader-cache-v2";
 
 /* основные файлы приложения */
 
