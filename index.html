@@ -65,12 +65,42 @@ location.href="reader.html?book="+book;
 }
 
 </script>
+
 <script>
+
 if ("serviceWorker" in navigator){
 
 navigator.serviceWorker.register("service-worker.js")
+.then(reg => {
+
+reg.update()
+
+reg.onupdatefound = () => {
+
+const newWorker = reg.installing
+
+newWorker.onstatechange = () => {
+
+if(newWorker.state === "installed"){
+
+if(navigator.serviceWorker.controller){
+
+console.log("New version available")
+location.reload()
 
 }
+
+}
+
+}
+
+}
+
+})
+
+}
+
+</script>
 
 </script>
 </body>

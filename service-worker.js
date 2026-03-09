@@ -1,67 +1,55 @@
-const CACHE_NAME = "reader-cache-v3";
-
-/* основные файлы приложения */
+const CACHE_NAME = "reader-cache-v4";
 
 const APP_FILES = [
-"./",
-"./index.html",
-"./reader.html",
 "./manifest.json"
 ];
-
-/* установка */
 
 self.addEventListener("install", event => {
 
 event.waitUntil(
-
-caches.open(CACHE_NAME).then(cache => {
-
-return cache.addAll(APP_FILES);
-
-})
-
+caches.open(CACHE_NAME).then(cache => cache.addAll(APP_FILES))
 );
 
 self.skipWaiting();
 
 });
 
-/* активация */
-
 self.addEventListener("activate", event => {
 
-event.waitUntil(self.clients.claim());
+event.waitUntil(
+
+caches.keys().then(keys =>
+Promise.all(
+keys.filter(k => k !== CACHE_NAME)
+.map(k => caches.delete(k))
+)
+)
+
+);
+
+self.clients.claim();
 
 });
-
-/* fetch */
 
 self.addEventListener("fetch", event => {
 
 const url = new URL(event.request.url);
 
-/* книги */
-
 if(url.pathname.includes("/books/")){
 
 event.respondWith(
 
-caches.match(event.request).then(response => {
+caches.match(event.request).then(res => {
 
-if(response) return response;
+if(res) return res;
 
-return fetch(event.request).then(fetchResponse => {
+return fetch(event.request).then(net => {
 
-const clone = fetchResponse.clone();
+const clone = net.clone();
 
-caches.open(CACHE_NAME).then(cache => {
+caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
 
-cache.put(event.request, clone);
-
-});
-
-return fetchResponse;
+return net;
 
 });
 
@@ -73,16 +61,6 @@ return;
 
 }
 
-/* обычные файлы */
-
-event.respondWith(
-
-caches.match(event.request).then(response => {
-
-return response || fetch(event.request);
-
-})
-
-);
+event.respondWith(fetch(event.request));
 
 });

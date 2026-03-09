@@ -209,7 +209,7 @@ left:0;
 width:100%;
 height:100%;
 background:#111;
-display:flex;
+display:none;   /* важно */
 align-items:center;
 justify-content:center;
 z-index:2000;
@@ -380,7 +380,10 @@ const params = new URLSearchParams(location.search);
 
 const bookName = params.get("book") || "";
 
-const bookPath = "books/"+bookName+"/";
+const bookPath = "books/" + bookName + "/";
+
+const key = "bookpass_" + bookName;
+
 
 document.getElementById("backButton").onclick = function(){
 
@@ -401,59 +404,96 @@ menuButton.onclick=()=>{
 menu.classList.toggle("open");
 };
 
-function getBookName(){
-  const p = new URLSearchParams(location.search)
-  return p.get("book") || p.get("bookname") || ""
+
+
+function openForm(book){
+  console.log("show password form")
+
+const overlay = document.getElementById("passwordOverlay")
+const input = document.getElementById("passwordInput")
+const button = document.getElementById("passwordButton")
+const error = document.getElementById("passwordError")
+
+overlay.style.display = "flex"
+
+/* очистить поле */
+
+input.value = ""
+error.textContent = ""
+
+/* обработчик кнопки */
+
+button.onclick = function(){
+
+console.log("button clicked")
+
+const pass = input.value
+
+console.log("entered:", pass)
+
+if(pass === book.password){
+
+localStorage.setItem(key, pass)
+
+overlay.style.display = "none";
+
+continueLoad(book)
+return
 }
+else{
+
+error.textContent = "Неверный пароль"
+
+}
+
+}};
 
 /* загрузка книги */
 
 async function loadBook(){
 
-  const book = await fetch(bookPath + "book.json").then(r => r.json())
+console.log("loadBook start")
 
-  const bookName = getBookName()
-  const key = "bookpass_" + bookName
+const book = await fetch(bookPath + "book.json").then(r => r.json())
+console.log("password", book.password)
+console.log("book loaded:", book)
+console.log("bookName:", bookName)
+console.log("storage key:", key)
 
-  /* --- ПРОВЕРКА ПАРОЛЯ --- */
-  if (book.password) {
+/* если книга без пароля */
 
-    const saved = sessionStorage.getItem(key)
+if(!book.password){
+console.log("not book password")
+continueLoad(book)
+return
 
-    if (saved === book.password) {
-      continueLoad(book)
-      return
-    }
+} else {
 
-    // показать форму
-    const overlay = document.getElementById("passwordOverlay")
-    overlay.style.display = "flex"
+/* проверяем сохранённый пароль */
 
-    document.getElementById("passwordButton").onclick = function(){
+const saved = localStorage.getItem(key)
 
-      const pass = document.getElementById("passwordInput").value
+console.log("saved password:", saved)
 
-      if (pass === book.password){
+/* пароль уже введён */
 
-        sessionStorage.setItem(key, pass)
+if(saved === book.password){
+console.log("saved === book.password")
 
-        overlay.style.display = "none"
+continueLoad(book)
+return
 
-        continueLoad(book)
+} else {
 
-      } else {
+/* показать форму */
 
-        document.getElementById("passwordError").textContent = "Неверный пароль"
+openForm(book)
 
-      }
-    }
+}}
+};
 
-    return
-  }
+/* книга без пароля */
 
-  /* если пароля нет */
-  continueLoad(book)
-}
 
 async function continueLoad(book){
 
@@ -645,7 +685,7 @@ document.body.classList.remove("reading-ui-hidden");
 /* запуск */
 
 
-loadBook();
+window.addEventListener("DOMContentLoaded", loadBook)
 </script>
 </body>
 </html>
