@@ -401,54 +401,58 @@ menuButton.onclick=()=>{
 menu.classList.toggle("open");
 };
 
-
+function getBookName(){
+  const p = new URLSearchParams(location.search)
+  return p.get("book") || p.get("bookname") || ""
+}
 
 /* загрузка книги */
 
 async function loadBook(){
 
-const book=await fetch(bookPath+"book.json").then(r=>r.json());
+  const book = await fetch(bookPath + "book.json").then(r => r.json())
 
-/* --- ПРОВЕРКА ПАРОЛЯ --- */
+  const bookName = getBookName()
+  const key = "bookpass_" + bookName
 
-if(book.password){
+  /* --- ПРОВЕРКА ПАРОЛЯ --- */
+  if (book.password) {
 
-let saved=sessionStorage.getItem("bookpass_"+bookPath);
+    const saved = sessionStorage.getItem(key)
 
-if(saved!==book.password){
+    if (saved === book.password) {
+      continueLoad(book)
+      return
+    }
 
-document.getElementById("passwordOverlay").style.display="flex";
+    // показать форму
+    const overlay = document.getElementById("passwordOverlay")
+    overlay.style.display = "flex"
 
-document.getElementById("passwordButton").onclick=function(){
+    document.getElementById("passwordButton").onclick = function(){
 
-let pass=document.getElementById("passwordInput").value;
+      const pass = document.getElementById("passwordInput").value
 
-if(pass===book.password){
+      if (pass === book.password){
 
-sessionStorage.setItem("bookpass_"+bookPath,pass);
+        sessionStorage.setItem(key, pass)
 
-document.getElementById("passwordOverlay").style.display="none";
+        overlay.style.display = "none"
 
-continueLoad(book);
+        continueLoad(book)
 
-}else{
+      } else {
 
-document.getElementById("passwordError").textContent="Неверный пароль";
+        document.getElementById("passwordError").textContent = "Неверный пароль"
 
-}
+      }
+    }
 
-};
+    return
+  }
 
-return;
-
-}
-
-}
-
-/* если пароль не нужен */
-
-continueLoad(book);
-
+  /* если пароля нет */
+  continueLoad(book)
 }
 
 async function continueLoad(book){
