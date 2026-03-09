@@ -407,7 +407,7 @@ menu.classList.toggle("open");
 
 
 function openForm(book){
-  console.log("show password form")
+
 
 const overlay = document.getElementById("passwordOverlay")
 const input = document.getElementById("passwordInput")
@@ -425,11 +425,11 @@ error.textContent = ""
 
 button.onclick = function(){
 
-console.log("button clicked")
+
 
 const pass = input.value
 
-console.log("entered:", pass)
+
 
 if(pass === book.password){
 
@@ -452,18 +452,15 @@ error.textContent = "Неверный пароль"
 
 async function loadBook(){
 
-console.log("loadBook start")
+
 
 const book = await fetch(bookPath + "book.json").then(r => r.json())
-console.log("password", book.password)
-console.log("book loaded:", book)
-console.log("bookName:", bookName)
-console.log("storage key:", key)
+
 
 /* если книга без пароля */
 
 if(!book.password){
-console.log("not book password")
+
 continueLoad(book)
 return
 
@@ -473,12 +470,11 @@ return
 
 const saved = localStorage.getItem(key)
 
-console.log("saved password:", saved)
+
 
 /* пароль уже введён */
 
 if(saved === book.password){
-console.log("saved === book.password")
 
 continueLoad(book)
 return
