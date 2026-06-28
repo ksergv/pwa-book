@@ -1,0 +1,29 @@
+{
+  "pages": [
+    {
+      "id": 1,
+      "file": "pages/001.html",
+      "title": "Введение"
+    },
+    {
+      "id": 2,
+      "file": "pages/002.html",
+      "title": "Содержание"
+    },
+    {
+      "id": 3,
+      "file": "pages/003.html",
+      "title": "Кто Я?"
+    },
+    {
+      "id": 4,
+      "file": "pages/004.html",
+      "title": "Виртуальное тело"
+    },
+    {
+      "id": 5,
+      "file": "pages/005.html",
+      "title": "Сознание как единое поле"
+    }
+  ]
+}
