@@ -2,28 +2,127 @@
   "pages": [
     {
       "id": 1,
-      "file": "pages/001.html",
-      "title": "Введение"
+      "file": "pages/001.html"
     },
     {
       "id": 2,
-      "file": "pages/002.html",
-      "title": "Содержание"
+      "file": "pages/002.html"
     },
     {
       "id": 3,
-      "file": "pages/003.html",
-      "title": "Часть -1: Человек.Кто Я?"
+      "file": "pages/003.html"
     },
     {
       "id": 4,
-      "file": "pages/004.html",
-      "title": "Глава 1. Виртуальное тело"
+      "file": "pages/004.html"
     },
     {
       "id": 5,
-      "file": "pages/005.html",
-      "title": "Глава 1. Сознание как единое поле"
+      "file": "pages/005.html"
+    },
+    {
+      "id": 6,
+      "file": "pages/006.html"
+    },
+    {
+      "id": 7,
+      "file": "pages/007.html"
+    },
+    {
+      "id": 8,
+      "file": "pages/008.html"
+    },
+    {
+      "id": 9,
+      "file": "pages/009.html"
+    },
+    {
+      "id": 10,
+      "file": "pages/010.html"
+    },
+    {
+      "id": 11,
+      "file": "pages/011.html"
+    },
+    {
+      "id": 12,
+      "file": "pages/012.html"
+    },
+    {
+      "id": 13,
+      "file": "pages/013.html"
+    },
+    {
+      "id": 14,
+      "file": "pages/014.html"
+    },
+    {
+      "id": 15,
+      "file": "pages/015.html"
+    },
+    {
+      "id": 16,
+      "file": "pages/016.html"
+    },
+    {
+      "id": 17,
+      "file": "pages/017.html"
+    },
+    {
+      "id": 18,
+      "file": "pages/018.html"
+    },
+    {
+      "id": 19,
+      "file": "pages/019.html"
+    },
+    {
+      "id": 20,
+      "file": "pages/020.html"
+    },
+    {
+      "id": 21,
+      "file": "pages/021.html"
+    },
+    {
+      "id": 22,
+      "file": "pages/022.html"
+    },
+    {
+      "id": 23,
+      "file": "pages/023.html"
+    },
+    {
+      "id": 24,
+      "file": "pages/024.html"
+    },
+    {
+      "id": 25,
+      "file": "pages/025.html"
+    },
+    {
+      "id": 26,
+      "file": "pages/026.html"
+    },
+    {
+      "id": 27,
+      "file": "pages/027.html"
+    },
+    {
+      "id": 28,
+      "file": "pages/028.html"
+    },
+    {
+      "id": 29,
+      "file": "pages/029.html"
+    },
+    {
+      "id": 30,
+      "file": "pages/030.html"
+    },
+    {
+      "id": 31,
+      "file": "pages/031.html"
     }
   ]
 }

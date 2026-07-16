@@ -1,81 +1,230 @@
 
 <div class="page">
-<h2 id="section1">Введение</h2>
 
 
-<p># Введение</p>
+<header class="book-header">
 
-<p>Каждый человек хотя бы однажды задавал себе вопрос:</p>
+<h1 class="book-title">
+📘 кто я
+</h1>
 
-<p>**Кто Я?**</p>
+<div class="book-actions">
 
-<p>На первый взгляд кажется, что ответ очевиден.</p>
+<a class="button" href="https://sksek.duckdns.org/export-pdf?bookname=%D0%BA%D1%82%D0%BE%20%D1%8F">
+    📄 WeasyPrint PDF
+</a>
 
-<p>Я — это человек.</p>
-
-<p>Я — это тело.</p>
-
-<p>Я — это память, мысли, чувства, жизненный опыт.</p>
-
-<p>Однако стоит немного задуматься, как привычная картина начинает разрушаться.</p>
-
-<p>Если это **моё** тело, то кто тот «Я», которому оно принадлежит?</p>
-
-<p>Если это **мои** мысли, то кто их наблюдает?</p>
-
-<p>Если это **моя** память, то существую ли Я отдельно от неё?</p>
-
-<p>Этот простой вопрос сопровождает человечество на протяжении тысячелетий. На него пытались ответить философия, религия и наука. Каждый подход открывал лишь часть общей картины, но ни один не смог окончательно соединить внутренний опыт человека с устройством наблюдаемого мира.</p>
-
-<p>Современная наука достигла огромных успехов в исследовании материи. Мы научились описывать движение галактик, строение атома и процессы, происходящие в клетках живых организмов. Но чем глубже наука изучает материю, тем труднее становится ответить на вопрос, почему вообще существует субъективный опыт и что такое сознание.</p>
-
-<p>Возникает парадокс.</p>
-
-<p>Мы способны исследовать почти всё, кроме самого исследователя.</p>
-
-<p>Именно поэтому вопрос «Кто Я?» остаётся открытым.</p>
-
-<p>Эта книга не ставит перед собой задачу опровергнуть существующие научные или философские представления. Её цель значительно скромнее.</p>
-
-<p>Попробуем построить модель, которая позволит объединить различные взгляды в единую непротиворечивую систему.</p>
-
-<p>Предположим, что сознание не возникает в результате деятельности мозга, а является более фундаментальной реальностью.</p>
-
-<p>Предположим, что физический мир представляет собой проявление более глубокого информационного уровня.</p>
-
-<p>Предположим, что древние философские традиции описывали не сверхъестественные явления, а пытались языком своей эпохи выразить принципы устройства этой реальности.</p>
-
-<p>Если подобные предположения верны хотя бы частично, Многие идеи начинают складываться в единую картину, например:</p>
-
-<p><li class='indent'> ✅ философский вопрос о природе личности;</li> <li class='indent'> ✅ современные представления о сознании;</li> <li class='indent'> ✅ информационная иерархия;</li> <li class='indent'> ✅ мыслеобразы;</li> <li class='indent'> ✅ практики внутреннего развития;</li> <li class='indent'> ✅ каббалистические символы.</li></p>
-
-<p>Возможно, все они являются различными описаниями одного и того же процесса.</p>
-
-<p>Эта книга представляет собой попытку построить такую модель.</p>
-
-<p>Она не претендует на окончательную истину.</p>
-
-<p>Мы будем задавать вопросы.</p>
-
-<p>Находить противоречия.</p>
-
-<p>Строить гипотезы.</p>
-
-<p>Возможно, некоторые предположения окажутся ошибочными.</p>
-
-<p>Возможно, другие потребуют уточнения.</p>
-
-<p>Но  если  в результате  сможем по-новому взглянуть на вопрос «Кто Я?», значит цель книги будет достигнута.</p>
-
-<p>Потому что любое настоящее исследование начинается не с ответа.</p>
-
-<p>Оно начинается с вопроса.</p>
-
-<p>И этот вопрос звучит очень просто.</p>
-
-<p>**Кто Я?** </p>
+<button class="button" onclick="window.print()">
+    📄 Windows PDF
+</button>
 
 
+<button onclick="exportPWA(&#39;кто я&#39;)">
+📱 Экспорт PWA
+</button>
+
+</div>
+
+
+</header>
+
+<script>
+
+function exportPWA(book){
+
+fetch("/export_pwa?book=" + encodeURIComponent(book))
+.then(r=>r.text())
+.then(()=>alert("PWA книга создана"))
+.catch(()=>alert("Ошибка экспорта"))
+
+}
+
+</script>
+
+
+<nav class="toc">
+
+
+
+
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section1">Содержание</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section2">Введение</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section3">Часть 1 Человек</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section4">Глава 1. Кто Я?</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section5">Глава 2 Виртуальное тело</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section6">Глава 3. Сознание как единое поле</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section7">Часть II. Информационная природа реальности</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section8">Глава 4. Информационная декогеренция</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section9">Глава 5. Информационная иерархия</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section10">Глава 6 Системы информационного кодирования реальности</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section11">Глава 7 Образное кодирование</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section12">Глава 8 Символическое и фонемное кодирование</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section13">Глава 9  Кабалистическая модель информационного кодирования</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section14">Часть III. Архитектура сознания</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section15">Глава 10 Сознание как информационный интерфейс</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section16">Глава 11. Два контура информационного интерфейса</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section17">Глава 12. Когерентность информационного поля</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section18">Глава 13. Сердце и мозг: два уровня обработки информации</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section19">Глава 14 Когерентная основа</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section20">Глава 15 Сознание как модулятор смыслов</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section21">Глава 16 Управляющий код</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section22">Глава 17 Образное кодирование(Архитектура)</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section23">Глава 18. Вибрационное кодирование(Архитектура)</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section24">Глава 19. Информационный резонанс</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section25">Глава 20 Уровни допуска</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section26">Часть IV Человек и общество</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section27">  Глава 21. Власть как иллюзия самоидентификации</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section28">Глава 22 Эгрегоры и коллективное сознание</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section29">Часть V. Практика</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section30">Глава 23. Работа с образами</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section31">Глава 24 Работа с Кодами</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section32"> Глава 25. Условия Когерентности</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section33">Заключение</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section34">Словарь Терминов</a>
+
+
+
+<a href="https://sksek.duckdns.org/book?bookname=%D0%BA%D1%82%D0%BE+%D1%8F#section35">Эпилог. На пороге следующего уровня понимания</a>
+
+
+
+</nav>
+
+
+<main class="book">
+
+
+
+
+
+
+
+
+
+
+<section class="chapter cover-chapter">
+
+
+
+<div class="chapter-content">
+<img src="img/titul.png" class="book-image" alt="">
+</div>
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<section class="chapter">
 
 
 

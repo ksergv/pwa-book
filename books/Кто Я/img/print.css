@@ -1,0 +1,170 @@
+@media print{
+
+@page{
+  margin:0;
+}
+
+body{
+  padding:0;
+  background:#fff;
+}
+
+.book{
+  max-width:none;
+  margin:0;
+}
+
+.book-title,
+.book-actions,
+.toc{
+  display:none!important;
+}
+
+.chapter{
+  break-before:page;
+  page-break-before:always;
+  min-height:100vh;
+  padding:16mm;
+}
+
+.chapter:first-of-type{
+  break-before:auto;
+  page-break-before:auto;
+}
+
+.cover-chapter{
+  min-height:100vh;
+  padding:0;
+}
+
+.cover-chapter h1,
+.cover-chapter h2,
+.cover-chapter h3,
+.cover-chapter p{
+  display:none!important;
+}
+
+.book-image,
+.part-image{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:1em auto;
+}
+
+.cover-chapter .chapter-content{
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cover-chapter .book-image,
+.cover-chapter .part-image{
+  width:100vw;
+  max-width:none;
+  height:100vh;
+  max-height:none;
+  margin:0;
+  object-fit:cover;
+}
+
+.part-chapter{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+  min-height:0;
+  padding:10mm;
+  break-inside:avoid;
+  page-break-inside:avoid;
+  text-align:center;
+}
+
+.part-title{
+  margin:0;
+  font-size:28pt;
+  line-height:1.15;
+  text-align:center;
+  break-after:avoid;
+  page-break-after:avoid;
+}
+
+.part-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  height:calc(100vh - 20mm);
+  max-width:100%;
+  break-before:avoid;
+  page-break-before:avoid;
+  break-inside:avoid;
+  page-break-inside:avoid;
+}
+
+.part-content p{
+  margin:0;
+  text-align:center;
+  text-indent:0;
+}
+
+.part-chapter .book-image,
+.part-chapter .part-image{
+  width:calc(100vw - 20mm);
+  max-width:calc(100vw - 20mm);
+  height:calc(100vh - 20mm);
+  max-height:calc(100vh - 20mm);
+  margin:0 auto;
+  object-fit:fill;
+  break-before:avoid;
+  page-break-before:avoid;
+}
+
+.part-chapter h1,
+.part-chapter h2,
+.part-chapter h3,
+.part-chapter p{
+  display:none!important;
+}
+/* Обычные иллюстрации */
+
+.image{
+    display:block;
+    max-width:100%;
+    height:auto;
+    margin:1.5em auto;
+}
+
+.image-sm {
+    border: 3px solid red !important;
+    width: 5cm !important;
+    max-width: 5cm !important;
+    height: auto !important;
+}
+.image-md{
+    display:block;
+    width:60%;
+    max-width:60%;
+    height:auto;
+    margin:1.5em auto;
+}
+
+.image-lg{
+    display:block;
+    width:80%;
+    max-width:80%;
+    height:auto;
+    margin:1.5em auto;
+}
+
+.image-xl{
+    display:block;
+    width:100%;
+    max-width:100%;
+    height:auto;
+    margin:1.5em auto;
+}
+}
+

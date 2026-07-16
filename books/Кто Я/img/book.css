@@ -1,0 +1,395 @@
+/* Base book layout */
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  background:#fff;
+  color:#111;
+  margin:0;
+  padding:20px;
+  font-family:Arial,Helvetica,sans-serif;
+}
+
+h1,
+h2,
+h3,
+em{
+  color:#111;
+}
+
+h1,
+h2,
+h3{
+  margin:1.5em 0 .8em;
+}
+
+p{
+  margin:0 0 1em;
+  text-align:justify;
+  text-indent:1em;
+  white-space:pre-line;
+}
+
+.book-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:20px;
+}
+
+.book-title{
+  margin:0 0 1em;
+}
+
+.book-actions{
+  position:fixed;
+  top:10px;
+  right:10px;
+  z-index:999;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.button,
+button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:36px;
+  padding:8px 12px;
+  border:0;
+  border-radius:6px;
+  background:#e0e0e0;
+  color:#000;
+  font:inherit;
+  text-decoration:none;
+  cursor:pointer;
+}
+
+.button:hover,
+button:hover{
+  background:#0b5ed7;
+  color:#fff;
+}
+
+.toc{
+  margin:25px 0;
+}
+
+.toc a{
+  display:block;
+  margin:.3em 0;
+  color:#0056b3;
+  text-decoration:none;
+}
+
+.toc a:hover{
+  text-decoration:underline;
+}
+
+.book{
+  max-width:820px;
+  margin:0 auto;
+}
+
+
+
+.book-list {
+    list-style: none;
+    margin: 0.6em 0;
+    padding: 0;
+}
+
+.book-list li {
+    position: relative;
+    padding-left: 1.5em;
+    margin: 0.3em 0;
+    line-height: 1.45;
+}
+
+.book-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+}
+
+.book-image,
+.part-image{
+  display:block;
+  max-width:100%;
+  height:auto;
+  margin:1.5em auto;
+}
+
+.part-image{
+  width:100%;
+  object-fit:contain;
+}
+
+.cover-chapter h2{
+  display:none;
+}
+
+.cover-chapter{
+  min-height:100vh;
+  padding:0;
+}
+
+.cover-chapter .chapter-content{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.cover-chapter .book-image,
+.cover-chapter .part-image{
+  width:100%;
+  max-width:none;
+  max-height:none;
+  height:100vh;
+  margin:0;
+  object-fit:cover;
+}
+
+.part-chapter{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  padding:10mm;
+  text-align:center;
+}
+
+.part-title{
+  margin:0;
+  text-align:center;
+  font-size:2.2rem;
+  line-height:1.15;
+}
+
+.part-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:calc(100vh - 20mm);
+}
+
+.part-content p{
+  max-width:42em;
+  margin:0;
+  text-align:center;
+  text-indent:0;
+}
+
+.part-chapter .book-image,
+.part-chapter .part-image{
+  width:calc(100vw - 20mm);
+  max-width:100%;
+  height:calc(100vh - 20mm);
+  max-height:calc(100vh - 20mm);
+  margin:0 auto;
+  object-fit:fill;
+}
+
+p:first-of-type::first-letter{
+  color:rgb(114,98,6);
+  font-weight:bold;
+  font-size:1.1em;
+}
+
+.image-xs {
+    display: block;
+    width: 20%;
+    height: auto;
+    margin: 1em auto;
+}
+
+.image-sm {
+    display: block;
+    width: 40%;
+    height: auto;
+    text-align: left;
+    margin: 1em auto;
+}
+
+.image-md {
+    display: block;
+    width: 60%;
+    height: auto;
+    margin: 1em auto;
+}
+
+.image-lg {
+    display: block;
+    width: 80%;
+    height: auto;
+    margin: 1em auto;
+}
+.image-left {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+
+.image-right {
+    float: right;
+    margin: 0 0 10px 10px;
+}
+/*----------------------------------
+  Таблица управляющих кодов
+----------------------------------*/
+
+.code-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em auto;
+    font-size: 0.92em;
+    text-align: center;
+    border: 2px solid #3f5f8a;
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    background: #ffffff;
+}
+
+.code-table caption {
+    font-weight: bold;
+    font-size: 1.05em;
+    color: #020a11;
+    margin-bottom: .6em;
+}
+
+.code-table th,
+.code-table td {
+    border: 1px solid #bfcddd;
+    color:#000;
+    padding: .45em .3em;
+}
+
+.code-table th {
+    background: linear-gradient(#5b7faa, #45698f);
+    color:#000;
+    font-weight: 600;
+}
+
+.code-table td:first-child,
+.code-table th:first-child {
+    font-weight: bold;
+    background: #edf4fb;
+}
+
+.code-table tr:nth-child(even) td {
+    background: #f8fbff;
+}
+
+.code-table td:hover {
+    background: #fff7d6;
+    transition: background .2s ease;
+}
+
+  pre {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgb(93, 95, 116);
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    font-family: Consolas, "Courier New", monospace;
+    line-height: 1;
+    color: white;
+}
+  
+
+/* Адаптивность для мобильных */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+
+  input[type="text"] {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  form {
+    padding: 10px;
+  }
+
+  #buttons {
+    flex-direction: column;
+  }
+}
+
+@media print {
+  @page {
+    margin: 0;
+  }
+
+  body {
+    padding: 0;
+    background: #fff;
+  }
+
+  .book-title,
+  .book-actions,
+  .toc {
+    display: none !important;
+  }
+
+  .chapter {
+    break-before: page;
+    page-break-before: always;
+    box-sizing: border-box;
+    min-height: 100vh;
+   }
+
+  .chapter:first-of-type {
+    break-before: auto;
+    page-break-before: auto;
+  }
+
+  .cover-chapter {
+    padding: 0;
+  }
+
+  .cover-chapter h1,
+  .cover-chapter h2,
+  .cover-chapter h3,
+  .cover-chapter p {
+    display: none !important;
+  }
+
+  .chapter-image,
+  .part-image {
+    display: block;
+    width: 100vw;
+    max-width: none;
+    height: 100vh;
+    max-height: 100vh;
+    object-fit: contain;
+    margin: -16mm;
+    break-before: page;
+    break-after: page;
+    page-break-before: always;
+    page-break-after: always;
+    page-break-inside: avoid;
+  }
+
+  .cover-chapter .chapter-image,
+  .cover-chapter .part-image {
+    width: 100vw;
+    max-width: none;
+    height: 100vh;
+    max-height: 100vh;
+    margin: 0;
+    break-before: auto;
+    page-break-before: auto;
+  }
+}
+
+

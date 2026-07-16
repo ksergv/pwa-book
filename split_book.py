@@ -2,8 +2,8 @@ import re
 import json
 from pathlib import Path
 
-INPUT="alchemy.htm"
-BOOK="alchemy"
+INPUT="Кто_Я.html"
+BOOK="Кто Я"
 
 root=Path("books")/BOOK
 pages_dir=root/"pages"
@@ -26,7 +26,7 @@ for i,sec in enumerate(sections,1):
     name=f"{i:03}.html"
 
     # исправить пути картинок
-    sec=sec.replace("./alchemy_files/","img/")
+    sec=sec.replace("./Кто_Я_files/","img/")
 
     page_html=f"""
 <div class="page">
