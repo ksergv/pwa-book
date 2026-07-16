@@ -76,9 +76,110 @@ flex-direction:column;
 
 .book-image{
   display: block;
+    width: 80%;
+    height: auto;
+    margin: 1em auto;
+}
+
+.image-xs {
+    display: block;
+    width: 20%;
+    height: auto;
+    margin: 1em auto;
+}
+
+.image-sm {
+    display: block;
+    width: 40%;
+    height: auto;
+    text-align: left;
+    margin: 1em auto;
+}
+
+.image-md {
+    display: block;
     width: 60%;
     height: auto;
     margin: 1em auto;
+}
+
+.image-lg {
+    display: block;
+    width: 80%;
+    height: auto;
+    margin: 1em auto;
+}
+.image-left {
+    float: left;
+    margin: 0 10px 10px 0;
+}
+
+.image-right {
+    float: right;
+    margin: 0 0 10px 10px;
+}
+/*----------------------------------
+  Таблица управляющих кодов
+----------------------------------*/
+
+.code-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5em auto;
+    font-size: 0.92em;
+    text-align: center;
+    border: 2px solid #3f5f8a;
+    box-shadow: 0 2px 8px rgba(0,0,0,.12);
+    background: #ffffff;
+}
+
+.code-table caption {
+    font-weight: bold;
+    font-size: 1.05em;
+    color: #020a11;
+    margin-bottom: .6em;
+}
+
+.code-table th,
+.code-table td {
+    border: 1px solid #bfcddd;
+    color:#000;
+    padding: .45em .3em;
+}
+
+.code-table th {
+    background: linear-gradient(#5b7faa, #45698f);
+    color:#000;
+    font-weight: 600;
+}
+
+.code-table td:first-child,
+.code-table th:first-child {
+    font-weight: bold;
+    background: #edf4fb;
+}
+
+.code-table tr:nth-child(even) td {
+    background: #f8fbff;
+}
+
+.code-table td:hover {
+    background: #fff7d6;
+    transition: background .2s ease;
+}
+
+  pre {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background: rgb(93, 95, 116);
+    border-radius: 10px;
+    overflow-wrap: break-word;
+    font-family: Consolas, "Courier New", monospace;
+    line-height: 1;
+    color: white;
 }
 /* контейнер страницы */
 
