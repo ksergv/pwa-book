@@ -724,6 +724,34 @@ document.getElementById("next").onclick=()=>showPage(current+1);
 
 document.getElementById("prev").onclick=()=>showPage(current-1);
 
+/* изменение размера текста */
+
+document.getElementById("textPlus").onclick = () => {
+    fontSize = Number(fontSize) + 2;
+
+    if (fontSize > 40) fontSize = 40;
+
+    document.documentElement.style.setProperty(
+        "--fontSize",
+        fontSize + "px"
+    );
+
+    localStorage.setItem("fontSize", fontSize);
+};
+
+document.getElementById("textMinus").onclick = () => {
+    fontSize = Number(fontSize) - 2;
+
+    if (fontSize < 12) fontSize = 12;
+
+    document.documentElement.style.setProperty(
+        "--fontSize",
+        fontSize + "px"
+    );
+
+    localStorage.setItem("fontSize", fontSize);
+};
+
 /* ===== UI режим чтения ===== */
 
 let uiHidden=false;
